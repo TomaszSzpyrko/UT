@@ -14,7 +14,7 @@ include "BoxesCalculator.php";
 <div>
     <form id="number" action="index.php" method="POST">
         <label for="number"># of shirts in the order:</label>
-            <input id="number" name="number" type="number"/>
+        <input id="number" name="number" type="number"/>
         <input type="submit" value="Calculate Delivery">
     </form>
 
@@ -22,24 +22,26 @@ include "BoxesCalculator.php";
 
 
         <?php
-        $calculator = new BoxesCalculator();
-        $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 5000]);
-        ?>
-        <table border="1">
-            <thead>
+        if ($_POST) {
+            $calculator = new BoxesCalculator();
+            $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 5000]);
+            ?>
+            <table border="1">
+                <thead>
                 <tr>
                     <td>Box size</td>
                     <td># of boxes</td>
                 </tr>
-            </thead>
-            <?php
-            foreach ($result as $boxSize => $numOfBoxes) { ?>
-                <tr>
-                    <td><?=$boxSize?></td>
-                    <td><?=$numOfBoxes?></td>
-                </tr>
-            <?php } ?>
-        </table>
+                </thead>
+                <?php
+                foreach ($result as $boxSize => $numOfBoxes) { ?>
+                    <tr>
+                        <td><?= $boxSize ?></td>
+                        <td><?= $numOfBoxes ?></td>
+                    </tr>
+                <?php } ?>
+            </table>
+        <?php } ?>
     </div>
 </body>
 </html>

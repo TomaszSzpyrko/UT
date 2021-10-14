@@ -29,6 +29,14 @@ class BoxesCalculatorTest
             $this->error('3rd test failed');
         }
 
+        print "================================\n";
+        print "test 4rd given case\n";
+        $boxesToSend = $boxesCalculator->getNumberOfBoxesAndSizes(510, $boxesAvailable);
+        if ($boxesToSend != array(500 => 1, 250 => 1)) {
+            print_r($boxesToSend);
+            $this->error('4th test failed');
+        }
+
     }
 
     private function error($msg) {

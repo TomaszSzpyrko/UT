@@ -8,15 +8,14 @@ include "BoxesCalculator.php";
         "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-    <meta content="application/http" charset="UTF-8">
     <title>Universal Textiles – Developer Test</title>
 </head>
 <body>
 <div>
     <form id="number" action="index.php" method="POST">
-        Set Number: <input type="number" name="number" value="">
-
-        <input type="submit">
+        <label for="number"># of shirts in the order:</label>
+            <input id="number" name="number" type="number"/>
+        <input type="submit" value="Calculate Delivery">
     </form>
 
     <div id="res">
@@ -26,7 +25,7 @@ include "BoxesCalculator.php";
         $calculator = new BoxesCalculator();
         $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 5000]);
         ?>
-        <table>
+        <table border="1">
             <thead>
                 <tr>
                     <td>Box size</td>
@@ -34,17 +33,13 @@ include "BoxesCalculator.php";
                 </tr>
             </thead>
             <?php
-            foreach ($result as $boxSizeAndNumberOfBoxesWithThisSize) { ?>
+            foreach ($result as $boxSize => $numOfBoxes) { ?>
                 <tr>
-                    <td><?=$boxSizeAndNumberOfBoxesWithThisSize.key?></td>
-                    <td><?=$boxSizeAndNumberOfBoxesWithThisSize.value?></td>
+                    <td><?=$boxSize?></td>
+                    <td><?=$numOfBoxes?></td>
                 </tr>
             <?php } ?>
         </table>
-//        echo '<pre>';
-//        print_r($result);
-//        echo '</pre>';
-        ?> .
     </div>
 </body>
 </html>

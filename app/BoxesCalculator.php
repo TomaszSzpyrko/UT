@@ -2,7 +2,8 @@
 
 class BoxesCalculator
 {
-    function getNumberOfBoxesAndSizes($numberOfShirtsOrdered, $sizesOfBoxesAvailable) {
+    function getNumberOfBoxesAndSizes($numberOfShirtsOrdered, $sizesOfBoxesAvailable)
+    {
         $boxesToSend = array();
         rsort($sizesOfBoxesAvailable);
         $shirtsLeft = $numberOfShirtsOrdered;
@@ -26,18 +27,8 @@ class BoxesCalculator
             if ($shirtsLeft <= 0) {
                 break;
             }
-
         }
-        if ($numberOfShirtsOrdered > 0) {
-            $smallestSize = $sizesOfBoxesAvailable[count($sizesOfBoxesAvailable) - 1];
-            $boxesToSend[$smallestSize] = $boxesToSend[$smallestSize] + 1;
-        }
-        foreach ($sizesOfBoxesAvailable as $boxSize) {
-            if($boxesToSend[$boxSize] == 0) {
-                unset($boxesToSend[$boxSize]);
-            }
-        }
-
-        return $boxesToSend ;
+        $boxesToSend = array_filter($boxesToSend);
+        return $boxesToSend;
     }
 }

@@ -24,7 +24,7 @@ include "BoxesCalculator.php";
 
         <?php
         $calculator = new BoxesCalculator();
-        $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 5000]);
+        $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 2000, 5000]);
         echo '<pre>';
         print_r($result);
         echo '</pre>';

@@ -7,7 +7,7 @@ class BoxesCalculatorTest
     {
 
         $boxesCalculator = new BoxesCalculator();
-        $boxesAvailable = [250, 500, 1000, 5000];
+        $boxesAvailable = [250, 500, 1000, 2000, 5000];
 
         $boxesToSend = $boxesCalculator->getNumberOfBoxesAndSizes(1, $boxesAvailable);
         $type = gettype($boxesToSend);
@@ -24,7 +24,7 @@ class BoxesCalculatorTest
         }
 
         $boxesToSend = $boxesCalculator->getNumberOfBoxesAndSizes(260, $boxesAvailable);
-        if ($boxesToSend !== array(500 => 1)) {
+        if ($boxesToSend != array(500 => 1)) {
             print_r($boxesToSend);
             $this->error('3rd test failed');
         }

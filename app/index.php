@@ -25,9 +25,25 @@ include "BoxesCalculator.php";
         <?php
         $calculator = new BoxesCalculator();
         $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 5000]);
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
+        ?>
+        <table>
+            <thead>
+                <tr>
+                    <td>Box size</td>
+                    <td># of boxes</td>
+                </tr>
+            </thead>
+            <?php
+            foreach ($result as $boxSizeAndNumberOfBoxesWithThisSize) { ?>
+                <tr>
+                    <td><?=$boxSizeAndNumberOfBoxesWithThisSize.key?></td>
+                    <td><?=$boxSizeAndNumberOfBoxesWithThisSize.value?></td>
+                </tr>
+            <?php } ?>
+        </table>
+//        echo '<pre>';
+//        print_r($result);
+//        echo '</pre>';
         ?> .
     </div>
 </body>

@@ -5,32 +5,40 @@ class BoxesCalculator
     function getNumberOfBoxesAndSizes($numberOfBoxesOrdered, $sizesOfBoxesAvailable) {
         $boxesToSend = array();
         rsort($sizesOfBoxesAvailable);
-        //array_push($sizesOfBoxesAvailable, 1);
         print_r($sizesOfBoxesAvailable);
         $shirtsLeft = $numberOfShirtsOrdered;
         $lastBoxSize = end($sizesOfBoxesAvailable);
         $previousBoxSize = prev($sizesOfBoxesAvailable);
-        print "lastBoxSize - $lastBoxSize \n previousBoxSize - $previousBoxSize \n";
-
+        $nextBoxSize = $sizesOfBoxesAvailable[count($sizesOfBoxesAvailable) - 3];
+        print " lastBoxSize - $lastBoxSize \n previousBoxSize - $previousBoxSize \n nextBoxSize $nextBoxSize \n";
         foreach ($sizesOfBoxesAvailable as $i => $boxSize) {
-            //print " $i => $boxSize \n";
+
+            $numberOfBoxesOfSize = floor($shirtsLeft / $boxSize);
+            $shirtsLeft = $shirtsLeft % $boxSize;
+            $boxesToSend[$boxSize] = $numberOfBoxesOfSize;
+            print "shirtsLeft  $shirtsLeft \n";
+
+
+//            if ($shirtsLeft > $previousBoxSize and $shirtsLeft > $lastBoxSize and $shirtsLeft < $nextBoxSize) {
+//                print "for 1000 shirtsLefts  $shirtsLeft \n";
+//                $shirtsLeft = $shirtsLeft - $nextBoxSize;
+//                $boxesToSend[$nextBoxSize] = $numberOfBoxesOfSize+1;
+//            }
+
+            if ($shirtsLeft < $previousBoxSize and $shirtsLeft > $lastBoxSize) {
+                print "for 500 shirtsLefts  $shirtsLeft \n";
+                $shirtsLeft = $shirtsLeft - $previousBoxSize;
+                $boxesToSend[$previousBoxSize] = $numberOfBoxesOfSize + 1;
+            }
+
+            if ($shirtsLeft < $lastBoxSize and $shirtsLeft > 0) {
+                print "for 250 shirtsLefts  $shirtsLeft \n";
+                $shirtsLeft = $shirtsLeft - $lastBoxSize;
+                $boxesToSend[$lastBoxSize] = $numberOfBoxesOfSize + 1;
+            }
             if ($shirtsLeft <= 0) {
                 break;
             }
-            $numberOfBoxesOfSize = floor($shirtsLeft / $boxSize);
-            $shirtsLeft = $shirtsLeft % $boxSize;
-
-            print "shirtsLeft  $shirtsLeft \n";
-
-            if ($shirtsLeft <= $previousBoxSize and $shirtsLeft > $lastBoxSize) {
-                $boxesToSend[$previousBoxSize] = 1;
-                $shirtsLeft = $shirtsLeft - $previousBoxSize;
-            } elseif ($shirtsLeft < $lastBoxSize) {
-                $boxesToSend[$lastBoxSize] = $numberOfBoxesOfSize;
-                $shirtsLeft = $shirtsLeft - $lastBoxSize;
-            }
-            $boxesToSend[$boxSize] = $numberOfBoxesOfSize;
-
 
         }
         if($numberOfBoxesOrdered > 0) {

@@ -2,7 +2,7 @@
 
 class BoxesCalculator
 {
-    function getNumberOfBoxesAndSizes($numberOfBoxesOrdered, $sizesOfBoxesAvailable) {
+    function getNumberOfBoxesAndSizes($numberOfShirtsOrdered, $sizesOfBoxesAvailable) {
         $boxesToSend = array();
         rsort($sizesOfBoxesAvailable);
         //print_r($sizesOfBoxesAvailable);

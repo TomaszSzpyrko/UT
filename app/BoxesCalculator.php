@@ -12,24 +12,29 @@ class BoxesCalculator
         $nextBoxSize = $sizesOfBoxesAvailable[count($sizesOfBoxesAvailable) - 3];
         foreach ($sizesOfBoxesAvailable as $i => $boxSize) {
             if ($shirtsLeft <= 0) {
-                $shirtsLeft = 0;
                 break;
             }
             $numberOfBoxesOfSize = floor($shirtsLeft / $boxSize);
             $shirtsLeft = $shirtsLeft % $boxSize;
             $boxesToSend[$boxSize] = $numberOfBoxesOfSize;
-            print_r(" \n  $shirtsLeft \n");
-            if ($shirtsLeft < $previousBoxSize and $shirtsLeft > $lastBoxSize) {
-                $boxesToSend[$previousBoxSize] = $numberOfBoxesOfSize + 1;
-                //$shirtsLeft = $shirtsLeft - $previousBoxSize;
-                $shirtsLeft = 0;
-                //print_r(" \n  $shirtsLeft \n");
 
+            if ($shirtsLeft < $nextBoxSize and $shirtsLeft > $previousBoxSize*1.5) {
+                if (!isset($boxesToSend[$nextBoxSize])){$boxesToSend[$nextBoxSize]=0;}
+                $boxesToSend[$nextBoxSize] = $boxesToSend[$nextBoxSize] + 1;
+                //$shirtsLeft = 0;
+            }
+
+            if ($shirtsLeft < $previousBoxSize and $shirtsLeft > $lastBoxSize) {
+                if (!isset($boxesToSend[$previousBoxSize])){$boxesToSend[$previousBoxSize]=0;}
+                $boxesToSend[$previousBoxSize] =$boxesToSend[$previousBoxSize] + 1;
+                //$shirtsLeft = 0;
             }
             if ($shirtsLeft < $lastBoxSize and $shirtsLeft > 0) {
-                $boxesToSend[$lastBoxSize] = $numberOfBoxesOfSize + 1;
+                if (!isset($boxesToSend[$lastBoxSize])){$boxesToSend[$lastBoxSize]=0;}
+                $boxesToSend[$lastBoxSize] = $boxesToSend[$lastBoxSize] + 1;
+                //$shirtsLeft = 0;
             }
-            //print_r(" \n  $shirtsLeft \n");
+
 
         }
         $boxesToSend = array_filter($boxesToSend);
@@ -37,5 +42,5 @@ class BoxesCalculator
     }
 }
 
-$g = new BoxesCalculator();
-print_r($g->getNumberOfBoxesAndSizes(4444, [250, 500, 1000, 2000, 5000]));
+//$g = new BoxesCalculator();
+//print_r($g->getNumberOfBoxesAndSizes(499, [250, 500, 1000, 2000, 5000]));

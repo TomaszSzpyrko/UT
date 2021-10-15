@@ -17,14 +17,11 @@ include "BoxesCalculator.php";
         <input id="number" name="number" type="number"/>
         <input type="submit" value="Calculate Delivery">
     </form>
-
     <div id="res">
-
-
         <?php
         if ($_POST) {
             $calculator = new BoxesCalculator();
-            $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 5000]);
+            $result = $calculator->getNumberOfBoxesAndSizes($_POST['number'], [250, 500, 1000, 2000, 5000]);
             ?>
             <table border="1">
                 <thead>

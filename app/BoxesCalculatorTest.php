@@ -9,11 +9,11 @@ class BoxesCalculatorTest
         $boxesCalculator = new BoxesCalculator();
         $boxesAvailable = [250, 500, 1000, 2000, 5000];
 
-//        $boxesToSend = $boxesCalculator->getNumberOfBoxesAndSizes(0, $boxesAvailable);
-//        $type = gettype($boxesToSend);
-//        if ($type != 'array') {
-//            $this->error('Type test failed');
-//        }
+        $boxesToSend = $boxesCalculator->getNumberOfBoxesAndSizes(0, $boxesAvailable);
+        $type = gettype($boxesToSend);
+        if ($type != 'array') {
+            $this->error('Type test failed');
+        }
         print "================================\n";
         print "test 1st given case\n";
         $boxesToSend = $boxesCalculator->getNumberOfBoxesAndSizes(1, $boxesAvailable);
@@ -56,9 +56,17 @@ class BoxesCalculatorTest
             print_r($boxesToSend);
             $this->error('extra test failed');
         }
+        print "================================\n";
+        print "1751 test given case\n";
+        $boxesToSend = $boxesCalculator->getNumberOfBoxesAndSizes(1751, $boxesAvailable);
+        if ($boxesToSend != array(2000 => 1)) {
+            print_r($boxesToSend);
+            $this->error('1751 test failed, suspected 2000 => 1');
+        }
     }
 
-    private function error($msg) {
+    private function error($msg)
+    {
         fwrite(STDERR, $msg);
         exit(1);
     }
